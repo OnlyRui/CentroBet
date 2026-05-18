@@ -414,12 +414,92 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 .mbtn-confirm{background:var(--green);color:#021a0a}
 .mbtn-cancel{background:var(--surface2);color:var(--muted);border:1px solid var(--border2) !important}
 .mbtn-confirm:hover,.mbtn-cancel:hover{filter:brightness(1.1)}
+
+/* ══════════════════════════════════════════
+   BOMBPARTY
+══════════════════════════════════════════ */
+.bp-layout{display:grid;grid-template-columns:220px 1fr 220px;gap:16px;align-items:start}
+.bp-players{display:flex;flex-direction:column;gap:8px}
+.bp-player{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;transition:all .2s;position:relative;overflow:hidden}
+.bp-player.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 18px rgba(59,158,255,.18)}
+.bp-player.dead{opacity:.38;filter:grayscale(1)}
+.bp-player.exploded{border-color:var(--red);animation:bpExplode .5s ease}
+@keyframes bpExplode{0%{transform:scale(1)}30%{transform:scale(1.08)}100%{transform:scale(1)}}
+.bp-player-avatar{width:34px;height:34px;border-radius:50%;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;font-family:'Barlow Condensed',sans-serif;flex-shrink:0;color:var(--accent)}
+.bp-player-info{flex:1;min-width:0}
+.bp-player-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bp-player-lives{display:flex;gap:3px;margin-top:3px}
+.bp-life{font-size:11px;transition:all .3s}
+.bp-life.lost{opacity:.2;filter:grayscale(1)}
+.bp-turn-tag{position:absolute;top:6px;right:8px;font-size:9px;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+
+.bp-arena{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:20px}
+.bp-bomb{position:relative;width:110px;height:110px;display:flex;align-items:center;justify-content:center}
+.bp-bomb-svg{width:110px;height:110px}
+.bp-fuse{stroke-dasharray:60;stroke-dashoffset:60;transition:stroke-dashoffset linear}
+.bp-timer-ring{stroke-dasharray:283;stroke-dashoffset:0;transition:stroke-dashoffset linear;stroke:var(--accent)}
+.bp-timer-ring.danger{stroke:var(--red)}
+.bp-bomb-time{position:absolute;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:var(--text);letter-spacing:.04em}
+
+.bp-syllable-wrap{text-align:center}
+.bp-syllable-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+.bp-syllable{font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:700;color:var(--gold2);letter-spacing:.06em;line-height:1;animation:bpSylIn .25s ease}
+@keyframes bpSylIn{from{transform:scale(1.3);opacity:0}to{transform:scale(1);opacity:1}}
+
+.bp-input-wrap{width:100%;max-width:340px;position:relative}
+.bp-input{width:100%;background:var(--bg);border:2px solid var(--border2);border-radius:10px;color:var(--text);font-family:'Barlow',sans-serif;font-size:18px;padding:12px 16px;outline:none;text-align:center;letter-spacing:.04em;transition:border-color .15s}
+.bp-input:focus{border-color:var(--accent)}
+.bp-input.valid{border-color:var(--green);color:var(--green)}
+.bp-input.invalid{border-color:var(--red);animation:bpShake .3s ease}
+@keyframes bpShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.bp-input:disabled{opacity:.4;cursor:default}
+
+.bp-feedback{font-size:12px;color:var(--muted);min-height:18px;text-align:center;transition:all .2s}
+.bp-feedback.ok{color:var(--green)}
+.bp-feedback.err{color:var(--red)}
+
+.bp-used-tag{display:inline-block;background:rgba(59,158,255,.1);border:1px solid rgba(59,158,255,.2);border-radius:4px;font-size:10px;color:var(--accent);padding:2px 7px;margin:2px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.04em}
+
+.bp-right{display:flex;flex-direction:column;gap:12px}
+.bp-info-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.bp-info-title{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;font-weight:600}
+.bp-used-words{display:flex;flex-wrap:wrap;gap:4px;max-height:160px;overflow-y:auto}
+
+
+/* Lobby/waiting room */
+.bp-lobby{background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:28px;max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+.bp-lobby-title{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:700;color:var(--text);text-align:center}
+.bp-lobby-title span{color:var(--gold2)}
+.bp-waiting-list{display:flex;flex-direction:column;gap:6px}
+.bp-waiting-player{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 14px;display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.bp-waiting-player .host-tag{font-size:10px;color:var(--gold);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.bp-waiting-player .bp-player-bet{font-size:11px;color:var(--green);font-weight:700}
+.bp-bet-input{background:var(--bg);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;padding:10px 14px;outline:none;width:100%;transition:border-color .15s}
+.bp-bet-input:focus{border-color:var(--accent)}
+.bp-pot-display{background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:10px 16px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--gold2);letter-spacing:.04em}
+.bp-pot-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;text-align:center;margin-bottom:4px}
+.bp-start-btn{background:linear-gradient(135deg,#f0a500,#c07a00);color:#fff;border:none;border-radius:8px;padding:13px;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:.08em;cursor:pointer;text-transform:uppercase;width:100%;transition:all .15s}
+.bp-start-btn:hover{filter:brightness(1.1)}
+.bp-start-btn:disabled{opacity:.4;cursor:default}
+.bp-room-code{background:var(--bg);border:1px solid var(--border2);border-radius:8px;padding:10px 16px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:.25em;color:var(--accent);cursor:pointer;transition:background .15s;user-select:all}
+.bp-room-code:hover{background:var(--surface2)}
+
+.bp-result-overlay{position:absolute;inset:0;background:rgba(12,21,32,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px;gap:14px;z-index:10;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.bp-result-title{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:700;color:var(--gold2);letter-spacing:.06em}
+.bp-result-sub{font-size:14px;color:var(--muted);text-align:center}
+.bp-result-btn{background:linear-gradient(135deg,#3b9eff,#1a6fcc);color:#fff;border:none;border-radius:8px;padding:11px 28px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;transition:filter .15s;margin-top:4px}
+.bp-result-btn:hover{filter:brightness(1.12)}
+
+.bp-phase{font-size:11px;color:var(--muted);text-align:center;text-transform:uppercase;letter-spacing:.1em}
+.game-icon.bombparty{background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.25)}
+.lobby-card-banner.bp-banner{background:radial-gradient(ellipse at 50% 120%, rgba(240,165,0,.28) 0%, transparent 70%), var(--surface2)}
 </style>
 </head>
 <body>
 
 <!-- ══════ LOGIN SCREEN ══════ -->
-<div class="auth-screen" id="scr-login">
+<div class="auth-screen" id="scr-login" style="display:none">
   <div class="auth-box">
     <div class="auth-logo">
       <svg width="110" height="66" viewBox="0 0 120 72" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -458,11 +538,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 
     <button class="auth-btn secondary" onclick="showScreen('scr-register')">Crear cuenta</button>
 
-    <div class="root-note">
-      <strong>⚑ Cuenta root admin</strong><br>
-      Usuario: <code>admin</code> &nbsp;·&nbsp; Contraseña: <code>admin123</code><br>
-      <span style="color:rgba(255,71,87,.7);font-size:10px">Cambia la contraseña tras el primer inicio de sesión.</span>
-    </div>
+
   </div>
 </div>
 
@@ -484,19 +560,10 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
     </div>
     <div class="auth-heading">Crear cuenta</div>
 
-    <div class="field-row">
-      <div class="field">
-        <label>Nombre de usuario</label>
-        <input type="text" id="r-user" placeholder="jugador99" autocomplete="off" oninput="checkRegUser()">
-        <span class="field-hint" id="r-user-hint"></span>
-      </div>
-      <div class="field">
-        <label>Rol inicial</label>
-        <select id="r-role">
-          <option value="user">Usuario</option>
-          <option value="vip">VIP</option>
-        </select>
-      </div>
+    <div class="field">
+      <label>Nombre de usuario</label>
+      <input type="text" id="r-user" placeholder="jugador99" autocomplete="off" oninput="checkRegUser()">
+      <span class="field-hint" id="r-user-hint"></span>
     </div>
 
     <div class="field">
@@ -607,7 +674,16 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
           <span class="game-info-desc">Juega con más jugadores en sala</span>
         </div>
       </button>
-      <button class="game-option" id="opt-mines" onclick="selectGame('mines')">
+      <button class="game-option" id="opt-bombparty" onclick="selectGame('bombparty')">
+        <div class="game-icon bombparty">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f0a500" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="14" r="7"/><path d="M12 7V4"/><path d="M15 4c0-1.5-1-2-3-2s-3 .5-3 2"/><circle cx="9" cy="12" r="1" fill="#f0a500"/><circle cx="13" cy="16" r="1" fill="#f0a500"/></svg>
+        </div>
+        <div class="game-info">
+          <span class="game-info-name">BombParty</span>
+          <span class="game-info-desc">Di una palabra con la sílaba antes de explotar</span>
+        </div>
+      </button>
+      <button class="game-option" id="opt-mines" onclick="selectGame('mines')">'
         <div class="game-icon mines">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>
         </div>
@@ -714,6 +790,33 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
         <button class="lobby-play-btn" style="background:linear-gradient(135deg,#ff4757,#c0392b)" onclick="event.stopPropagation();selectGame('mines')">Jugar ahora</button>
       </div>
     </div>
+    <!-- BombParty -->
+    <div class="lobby-card" onclick="selectGame('bombparty')">
+      <div class="lobby-card-banner bp-banner">
+        <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="52" cy="58" r="30" fill="#1a1008" stroke="#f0a500" stroke-width="1.5"/>
+          <ellipse cx="52" cy="58" rx="20" ry="20" fill="#2a1a06" stroke="#f0a500" stroke-width="1"/>
+          <path d="M52 28 Q58 18 68 14" stroke="#f0a500" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <circle cx="70" cy="12" r="4" fill="#ff4757"/>
+          <text x="32" y="55" font-size="11" fill="#ffc845" font-family="Barlow Condensed,sans-serif" font-weight="700">SÍ</text>
+          <text x="46" y="65" font-size="11" fill="#ffc845" font-family="Barlow Condensed,sans-serif" font-weight="700">LA</text>
+          <text x="60" y="55" font-size="11" fill="#ffc845" font-family="Barlow Condensed,sans-serif" font-weight="700">BA</text>
+          <circle cx="24" cy="38" r="8" fill="#1e2d1e" stroke="#00e701" stroke-width="1"/>
+          <text x="24" y="41" text-anchor="middle" font-size="8" fill="#00e701" font-family="Barlow Condensed,sans-serif" font-weight="700">P1</text>
+          <circle cx="80" cy="38" r="8" fill="#1e1e2d" stroke="#3b9eff" stroke-width="1"/>
+          <text x="80" y="41" text-anchor="middle" font-size="8" fill="#3b9eff" font-family="Barlow Condensed,sans-serif" font-weight="700">P2</text>
+        </svg>
+      </div>
+      <div class="lobby-card-body">
+        <div class="lobby-card-name">BombParty</div>
+        <div class="lobby-card-desc">Di una palabra que contenga la sílaba antes de que explote la bomba. ¡Multijugador en tiempo real!</div>
+        <div class="lobby-card-tag">
+          <span class="ltag gold">Multijugador</span>
+          <span class="ltag red">Tiempo límite</span>
+        </div>
+        <button class="lobby-play-btn" style="background:linear-gradient(135deg,#f0a500,#c07a00)" onclick="event.stopPropagation();selectGame('bombparty')">Jugar ahora</button>
+      </div>
+    </div>
     <!-- Ruleta Online -->
     <div class="lobby-card" onclick="selectGame('roulette-online')">
       <div class="lobby-card-banner" style="background:radial-gradient(ellipse at 50% 120%, rgba(255,200,69,.28) 0%, transparent 70%), var(--surface2)">
@@ -753,7 +856,7 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
   </div>
   <div class="lobby-stats" id="lobby-stats">
     <div class="lobby-stat"><div class="ls-val" id="ls-balance">$0</div><div class="ls-label">Tu balance</div></div>
-    <div class="lobby-stat"><div class="ls-val">3</div><div class="ls-label">Juegos disponibles</div></div>
+    <div class="lobby-stat"><div class="ls-val">4</div><div class="ls-label">Juegos disponibles</div></div>
     <div class="lobby-stat"><div class="ls-val" id="ls-role">—</div><div class="ls-label">Tu rol</div></div>
   </div>
 
@@ -1125,55 +1228,30 @@ input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}
 
 <script>
 /* ══════════════════════════════════════════
-   STORAGE — persiste usuarios en localStorage
+   API — todas las llamadas al backend Express
 ══════════════════════════════════════════ */
-const STORE_KEY = 'centrobet_users_v1';
+const API = '';  // mismo origen; si separas frontend cambia a 'http://tu-vps:3000'
 
-const ROOT_DEFAULT_PASS = 'admin123';
-
-function loadUsers(){
-  try {
-    const raw = localStorage.getItem(STORE_KEY);
-    if(raw) return JSON.parse(raw);
-  } catch(e){}
-  // First run — seed users including root admin
-  const seed = {
-    admin: {
-      username:'admin', email:'admin@centrobet.hn',
-      pass: ROOT_DEFAULT_PASS,
-      role:'admin', balance:99999, isRoot:true,
-      defaultPass:true,
-      joined: new Date().toLocaleDateString('es')
-    },
-    user1: {
-      username:'user1', email:'user1@centrobet.hn',
-      pass:'pass123', role:'user', balance:1000,
-      isRoot:false, defaultPass:false,
-      joined: new Date().toLocaleDateString('es')
-    },
-    user2: {
-      username:'user2', email:'user2@centrobet.hn',
-      pass:'pass123', role:'user', balance:500,
-      isRoot:false, defaultPass:false,
-      joined: new Date().toLocaleDateString('es')
-    },
-    vip1: {
-      username:'vip1', email:'vip1@centrobet.hn',
-      pass:'vip123', role:'vip', balance:5000,
-      isRoot:false, defaultPass:false,
-      joined: new Date().toLocaleDateString('es')
-    }
-  };
-  saveUsers(seed);
-  return seed;
+async function apiFetch(path, opts = {}) {
+  const res = await fetch(API + path, {
+    headers: { 'Content-Type': 'application/json' },
+    ...opts,
+    body: opts.body ? JSON.stringify(opts.body) : undefined
+  });
+  return res.json();
 }
 
-function saveUsers(db){ localStorage.setItem(STORE_KEY, JSON.stringify(db)); }
-
-let DB = loadUsers();
-let CU = null; // current user key
+let DB = {};   // caché local de usuarios (se refresca desde el servidor)
+let CU = null; // username del usuario activo
 let adminActions = 0;
 const aLog = [];
+
+/* Refresca DB desde el servidor (solo para admin) */
+async function reloadDB() {
+  const users = await apiFetch('/api/users');
+  DB = {};
+  users.forEach(u => { DB[u.username] = u; });
+}
 
 /* ══════════════════════════════════════════
    AUTH HELPERS
@@ -1241,9 +1319,9 @@ function checkRegUser(){
   const v = document.getElementById('r-user').value.trim();
   const h = document.getElementById('r-user-hint');
   if(!v){ h.textContent=''; return; }
-  const taken = !!DB[v.toLowerCase()];
-  h.textContent = taken ? '✗ Usuario ya en uso' : '✓ Disponible';
-  h.className = 'field-hint ' + (taken ? 'err' : '');
+  if(!/^[a-z0-9_]{3,20}$/.test(v.toLowerCase())){
+    h.textContent='3-20 chars, solo letras/números/_'; h.className='field-hint err';
+  } else { h.textContent='✓ Formato válido'; h.className='field-hint'; }
 }
 
 function checkRegEmail(){
@@ -1251,63 +1329,48 @@ function checkRegEmail(){
   const h = document.getElementById('r-email-hint');
   if(!v){ h.textContent=''; return; }
   const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  const taken = Object.values(DB).some(u=>u.email.toLowerCase()===v);
-  h.textContent = !valid ? '✗ Email inválido' : taken ? '✗ Email ya registrado' : '✓ Disponible';
-  h.className = 'field-hint ' + (!valid||taken ? 'err' : '');
+  h.textContent = valid ? '✓ Válido' : '✗ Email inválido';
+  h.className = 'field-hint ' + (!valid ? 'err' : '');
 }
 
 /* ══════════════════════════════════════════
    LOGIN / REGISTER / LOGOUT
 ══════════════════════════════════════════ */
-function doLogin(){
+async function doLogin(){
   const ident = document.getElementById('l-ident').value.trim();
   const pass  = document.getElementById('l-pass').value;
   const err   = document.getElementById('l-err');
 
   if(!ident || !pass){ err.textContent='Completa todos los campos.'; return; }
 
-  // Find by username OR email (case-insensitive)
-  const key = Object.keys(DB).find(k =>
-    k === ident.toLowerCase() ||
-    DB[k].email.toLowerCase() === ident.toLowerCase()
-  );
-
-  if(!key || DB[key].pass !== pass){
-    err.textContent = 'Usuario/email o contraseña incorrectos.';
-    return;
-  }
+  const data = await apiFetch('/api/login', { method:'POST', body:{ ident, pass } });
+  if(data.error){ err.textContent = data.error; return; }
 
   err.textContent = '';
-  CU = key;
-  showScreen('__none__'); // hide all auth screens
+  CU = data.user.username;
+  DB[CU] = data.user;
+  localStorage.setItem('cb_session_user', CU);
   document.querySelectorAll('.auth-screen').forEach(s=>s.classList.add('hidden'));
   applyUserToUI();
-  switchTab('roulette', document.getElementById('tab-rou'));
+  switchTab('home', document.getElementById('tab-home'));
 }
 
-function doRegister(){
+async function doRegister(){
   const username = document.getElementById('r-user').value.trim().toLowerCase();
   const email    = document.getElementById('r-email').value.trim().toLowerCase();
   const pass     = document.getElementById('r-pass').value;
   const pass2    = document.getElementById('r-pass2').value;
-  const role     = document.getElementById('r-role').value;
+  const role     = 'user'; // siempre usuario por defecto
   const err      = document.getElementById('r-err');
 
   if(!username||!email||!pass||!pass2){ err.textContent='Completa todos los campos.'; return; }
   if(!/^[a-z0-9_]{3,20}$/.test(username)){ err.textContent='Usuario: 3-20 chars, solo letras/números/_'; return; }
-  if(DB[username]){ err.textContent='Ese nombre de usuario ya está en uso.'; return; }
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent='Email inválido.'; return; }
-  if(Object.values(DB).some(u=>u.email.toLowerCase()===email)){ err.textContent='Ese email ya está registrado.'; return; }
   if(pass.length < 6){ err.textContent='La contraseña debe tener al menos 6 caracteres.'; return; }
   if(pass !== pass2){ err.textContent='Las contraseñas no coinciden.'; return; }
 
-  DB[username] = {
-    username, email, pass, role,
-    balance: role==='vip' ? 2500 : 500,
-    isRoot: false, defaultPass: false,
-    joined: new Date().toLocaleDateString('es')
-  };
-  saveUsers(DB);
+  const data = await apiFetch('/api/register', { method:'POST', body:{ username, email, pass, role } });
+  if(data.error){ err.textContent = data.error; return; }
 
   err.textContent = '';
   showToast('¡Cuenta creada! Ya puedes iniciar sesión.','win');
@@ -1316,6 +1379,7 @@ function doRegister(){
 
 function doLogout(){
   CU = null;
+  localStorage.removeItem('cb_session_user');
   document.getElementById('l-ident').value = '';
   document.getElementById('l-pass').value = '';
   document.getElementById('l-err').textContent = '';
@@ -1345,7 +1409,11 @@ function applyUserToUI(){
 }
 
 function getBalance(){ return DB[CU]?.balance ?? 0; }
-function setBalance(v){ if(CU){ DB[CU].balance=v; saveUsers(DB); } }
+async function setBalance(v){
+  if(!CU) return;
+  DB[CU].balance = v;
+  await apiFetch(`/api/users/${CU}/balance`, { method:'PUT', body:{ balance: v } });
+}
 function setBal(){
   const v = getBalance();
   const fmt = '$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -1442,21 +1510,23 @@ function updateProfileTab(){
   document.getElementById('cp-strength-fill').style.width='0%';
 }
 
-function doChangePass(){
+async function doChangePass(){
   const cur  = document.getElementById('cp-cur').value;
   const nw   = document.getElementById('cp-new').value;
   const nw2  = document.getElementById('cp-new2').value;
   const err  = document.getElementById('cp-err');
 
   if(!cur||!nw||!nw2){ err.textContent='Completa todos los campos.'; return; }
-  if(DB[CU].pass !== cur){ err.textContent='La contraseña actual es incorrecta.'; return; }
   if(nw.length < 6){ err.textContent='La nueva contraseña debe tener al menos 6 caracteres.'; return; }
   if(nw !== nw2){ err.textContent='Las contraseñas nuevas no coinciden.'; return; }
   if(nw === cur){ err.textContent='La nueva contraseña debe ser diferente a la actual.'; return; }
 
-  DB[CU].pass = nw;
+  const data = await apiFetch(`/api/users/${CU}/password`, {
+    method:'PATCH', body:{ currentPass: cur, newPass: nw }
+  });
+  if(data.error){ err.textContent = data.error; return; }
+
   DB[CU].defaultPass = false;
-  saveUsers(DB);
   err.textContent = '';
   updateProfileTab();
   showToast('✓ Contraseña actualizada correctamente','win');
@@ -1466,8 +1536,9 @@ function doChangePass(){
 /* ══════════════════════════════════════════
    ADMIN PANEL
 ══════════════════════════════════════════ */
-function refreshAdminPanel(){
-  if(!CU||DB[CU].role!=='admin') return;
+async function refreshAdminPanel(){
+  if(!CU||DB[CU]?.role!=='admin') return;
+  await reloadDB();
 
   // Players table
   const tbody = document.getElementById('players-tbody');
@@ -1511,72 +1582,73 @@ function refreshStats(){
   document.getElementById('kpi-acts').textContent = adminActions;
 }
 
-function adminGive(){
+async function adminGive(){
   const target = document.getElementById('give-target').value;
   const amt    = parseFloat(document.getElementById('give-amount').value)||0;
-  if(!target||!DB[target]){ showToast('Selecciona un jugador',''); return; }
+  if(!target){ showToast('Selecciona un jugador',''); return; }
   if(amt<1){ showToast('Cantidad mínima $1',''); return; }
-  DB[target].balance += amt;
-  saveUsers(DB);
+  const data = await apiFetch(`/api/users/${target}/balance`, { method:'PATCH', body:{ amount: amt } });
+  if(data.error){ showToast(data.error,'lose'); return; }
+  DB[target] = data.user;
   adminActions++;
-  addLog(`Dio <span class="log-pos">+$${amt.toFixed(2)}</span> a <span class="log-hi">${DB[target].username}</span>`);
-  refreshAdminPanel();
+  addLog(`Dio <span class="log-pos">+$${amt.toFixed(2)}</span> a <span class="log-hi">${target}</span>`);
+  await refreshAdminPanel();
   if(CU===target) setBal();
-  showToast(`+$${amt.toFixed(2)} añadido a ${DB[target].username}`,'win');
+  showToast(`+$${amt.toFixed(2)} añadido a ${target}`,'win');
   sndWin();
 }
 
-function quickGive(key, amt){
-  DB[key].balance += amt;
-  saveUsers(DB);
+async function quickGive(key, amt){
+  const data = await apiFetch(`/api/users/${key}/balance`, { method:'PATCH', body:{ amount: amt } });
+  if(data.error){ showToast(data.error,'lose'); return; }
+  DB[key] = data.user;
   adminActions++;
-  addLog(`+$${amt} rápido a <span class="log-hi">${DB[key].username}</span>`);
-  refreshAdminPanel();
+  addLog(`+$${amt} rápido a <span class="log-hi">${key}</span>`);
+  await refreshAdminPanel();
   if(CU===key) setBal();
-  showToast(`+$${amt} añadido a ${DB[key].username}`,'win');
+  showToast(`+$${amt} añadido a ${key}`,'win');
 }
 
-function adminChangeRole(){
+async function adminChangeRole(){
   const target  = document.getElementById('role-target').value;
   const newRole = document.getElementById('role-new').value;
-  if(!target||!DB[target]) return;
-  if(DB[target].isRoot && newRole!=='admin'){ showToast('No puedes cambiar el rol del root admin','lose'); return; }
-  const old = DB[target].role;
-  DB[target].role = newRole;
-  saveUsers(DB);
+  if(!target) return;
+  const data = await apiFetch(`/api/users/${target}/role`, { method:'PATCH', body:{ role: newRole } });
+  if(data.error){ showToast(data.error,'lose'); return; }
+  const old = DB[target]?.role;
+  DB[target] = data.user;
   adminActions++;
-  addLog(`Cambió rol de <span class="log-hi">${DB[target].username}</span>: ${ROLE_LABELS[old]} → ${ROLE_LABELS[newRole]}`);
-  refreshAdminPanel();
+  addLog(`Cambió rol de <span class="log-hi">${target}</span>: ${ROLE_LABELS[old]} → ${ROLE_LABELS[newRole]}`);
+  await refreshAdminPanel();
   if(CU===target) applyUserToUI();
-  showToast(`${DB[target].username} ahora es ${ROLE_LABELS[newRole]}`,'info');
+  showToast(`${target} ahora es ${ROLE_LABELS[newRole]}`,'info');
 }
 
-function adminResetPass(){
+async function adminResetPass(){
   const target = document.getElementById('rpass-target').value;
   const npass  = document.getElementById('rpass-new').value;
-  if(!target||!DB[target]){ showToast('Selecciona un jugador',''); return; }
+  if(!target){ showToast('Selecciona un jugador',''); return; }
   if(!npass||npass.length<4){ showToast('Contraseña muy corta',''); return; }
-  DB[target].pass = npass;
-  DB[target].defaultPass = false;
-  saveUsers(DB);
+  const data = await apiFetch(`/api/users/${target}/password`, { method:'PATCH', body:{ newPass: npass, force: true } });
+  if(data.error){ showToast(data.error,'lose'); return; }
   adminActions++;
-  addLog(`Reseteó contraseña de <span class="log-hi">${DB[target].username}</span>`);
-  refreshAdminPanel();
-  showToast(`Contraseña de ${DB[target].username} actualizada`,'info');
+  addLog(`Reseteó contraseña de <span class="log-hi">${target}</span>`);
+  await refreshAdminPanel();
+  showToast(`Contraseña de ${target} actualizada`,'info');
 }
 
 function confirmDelete(key){
-  if(DB[key].isRoot){ showToast('No puedes eliminar la cuenta root','lose'); return; }
+  if(DB[key]?.isRoot){ showToast('No puedes eliminar la cuenta root','lose'); return; }
   openModal(
     `Eliminar usuario`,
-    `¿Seguro que deseas eliminar a <strong>${DB[key].username}</strong>? Esta acción no se puede deshacer.`,
+    `¿Seguro que deseas eliminar a <strong>${key}</strong>? Esta acción no se puede deshacer.`,
     null,
-    ()=>{
-      addLog(`Eliminó cuenta <span class="log-neg">${DB[key].username}</span>`);
-      delete DB[key];
-      saveUsers(DB);
+    async ()=>{
+      const data = await apiFetch(`/api/users/${key}`, { method:'DELETE' });
+      if(data.error){ showToast(data.error,'lose'); return; }
+      addLog(`Eliminó cuenta <span class="log-neg">${key}</span>`);
       adminActions++;
-      refreshAdminPanel();
+      await refreshAdminPanel();
       showToast('Usuario eliminado','lose');
     }
   );
@@ -1669,8 +1741,46 @@ const CX=160,CY=160,ROUT=152,RIN=48;
 let wAngle=0,spinning=false,wVel=0;
 let ballA=0,ballR=ROUT-14,ballVel=0;
 let targetIdx=0,rouColor=null,rouBet=0;
-let rouHist=[],prevTickSeg=-1,animDone=false,frameCount=0;
-const TOTAL_FRAMES=360,POCKET_R=RIN+36;
+let rouHist=[],prevTickSeg=-1,frameCount=0;
+const TOTAL_FRAMES=300,POCKET_R=RIN+30;
+
+/* ── Winrate controlado ── */
+const ROU_WINRATE_KEY = 'cb_rou_spins_v1';
+function getRouSpins(){
+  try{ return JSON.parse(localStorage.getItem(ROU_WINRATE_KEY)||'{}'); }catch(e){ return {}; }
+}
+function setRouSpins(data){ localStorage.setItem(ROU_WINRATE_KEY, JSON.stringify(data)); }
+function getUserSpins(){
+  if(!CU) return 0;
+  return getRouSpins()[CU] || 0;
+}
+function incrementUserSpins(){
+  if(!CU) return;
+  const data = getRouSpins();
+  data[CU] = (data[CU] || 0) + 1;
+  setRouSpins(data);
+}
+function shouldWin(){
+  const spins = getUserSpins();
+  if(spins < 2) return true;          // primeras 2 jugadas: 100% win
+  return Math.random() < 0.01;        // de ahí en adelante: 1% win
+}
+// Dado que gana, elige un targetIdx que coincida con el color apostado
+function getWinningIdx(){
+  const candidates = [];
+  for(let i=0;i<NS;i++){
+    if(SEGS[i].c === rouColor) candidates.push(i);
+  }
+  return candidates[Math.floor(Math.random()*candidates.length)];
+}
+// Dado que pierde, elige un targetIdx que NO coincida con el color apostado
+function getLosingIdx(){
+  const candidates = [];
+  for(let i=0;i<NS;i++){
+    if(SEGS[i].c !== rouColor) candidates.push(i);
+  }
+  return candidates[Math.floor(Math.random()*candidates.length)];
+}
 
 function drawWheel(wa,ba,br,showBall){
   const c=CTX;c.clearRect(0,0,320,320);
@@ -1699,10 +1809,10 @@ function drawWheel(wa,ba,br,showBall){
   c.beginPath();c.arc(CX,CY,RIN+8,0,Math.PI*2);c.strokeStyle='rgba(201,168,76,0.2)';c.lineWidth=1;c.stroke();
   if(showBall){
     const bx=CX+br*Math.cos(ba),by=CY+br*Math.sin(ba);
-    const bg=c.createRadialGradient(bx-2,by-2,0.5,bx,by,6);
-    bg.addColorStop(0,'#fff');bg.addColorStop(0.55,'#ccc');bg.addColorStop(1,'#777');
-    c.beginPath();c.arc(bx,by,6,0,Math.PI*2);c.fillStyle=bg;c.fill();
-    c.strokeStyle='rgba(0,0,0,0.3)';c.lineWidth=0.8;c.stroke();
+    const bg=c.createRadialGradient(bx-2.5,by-2.5,0.5,bx,by,7.5);
+    bg.addColorStop(0,'#fff');bg.addColorStop(0.4,'#e8e8e8');bg.addColorStop(0.75,'#aaa');bg.addColorStop(1,'#555');
+    c.beginPath();c.arc(bx,by,7.5,0,Math.PI*2);c.fillStyle=bg;c.fill();
+    c.strokeStyle='rgba(0,0,0,0.4)';c.lineWidth=1;c.stroke();
   }
   c.beginPath();c.moveTo(CX,CY-(ROUT+8));c.lineTo(CX-7,CY-(ROUT-2));c.lineTo(CX+7,CY-(ROUT-2));
   c.closePath();c.fillStyle='#f0a500';c.fill();
@@ -1714,46 +1824,54 @@ function checkTick(){
 }
 
 function animate(){
-  if(!spinning){drawWheel(wAngle,ballA,ballR,false);return;}
+  if(!spinning) return;
   frameCount++;
 
-  /* ── Wheel ── */
-  wAngle+=wVel;
-  wVel*=0.9895;
+  // — Rueda: desacelera suavemente —
+  wAngle += wVel;
+  wVel   *= 0.988;
 
-  /* ── Ball angular ── */
-  ballA+=ballVel;
-  ballVel*=0.9912;
+  // — Pelota angular: desacelera más lento que la rueda (más inercia), luego cae —
+  const fallProgress = Math.max(0, Math.min(1, (frameCount - TOTAL_FRAMES * 0.45) / (TOTAL_FRAMES * 0.55)));
+  // La pelota pierde velocidad angular a medida que cae hacia el interior
+  const ballDecay = 0.994 - fallProgress * 0.006; // 0.994 al inicio → ~0.988 al final
+  ballA   += ballVel;
+  ballVel *= ballDecay;
 
-  /* ── Ball radial: drift inward proportional to speed ── */
-  const speedRatio=Math.min(1,Math.abs(ballVel)/0.30);
-  /* When still fast → stay outer. When slow → approach pocket smoothly. */
-  const rawTarget=POCKET_R+(ROUT-14-POCKET_R)*speedRatio;
-  ballR+=(rawTarget-ballR)*0.038;
+  // — Pelota radial: empieza a caer antes (40%) con curva más pronunciada y rebote —
+  const t = Math.max(0, (frameCount - TOTAL_FRAMES * 0.40) / (TOTAL_FRAMES * 0.60));
+  const tClamped = Math.min(1, t);
+  // Curva cúbica con micro-rebote al llegar al pocket
+  const ease = tClamped < 0.85
+    ? Math.pow(tClamped / 0.85, 2.2)
+    : 1 + Math.sin((tClamped - 0.85) / 0.15 * Math.PI) * 0.04;
+  const targetR = (ROUT - 14) - (ROUT - 14 - POCKET_R) * ease;
+  ballR += (targetR - ballR) * 0.07;
 
   checkTick();
-  drawWheel(wAngle,ballA,ballR,true);
+  drawWheel(wAngle, ballA, ballR, true);
 
-  /* ── Settle condition: wheel nearly stopped ── */
-  if(Math.abs(wVel)<0.0018&&frameCount>80){
-    /* Compute exact pocket angle on the wheel */
-    const pocketAngle=wAngle+targetIdx*SEG_A-Math.PI/2+SEG_A*0.5;
-    /* How far is the ball from the pocket angle? */
-    let angDiff=((pocketAngle-ballA+Math.PI)%(Math.PI*2)-Math.PI);
-    let radDiff=POCKET_R-ballR;
-
-    /* If ball is already very close — stop */
-    if(Math.abs(angDiff)<0.04&&Math.abs(radDiff)<1.5){
-      ballA=pocketAngle;ballR=POCKET_R;
-      drawWheel(wAngle,ballA,ballR,true);
-      spinning=false;animDone=true;
-      onResult();return;
+  // — Condición de parada: esperar que la pelota esté cerca del pocket —
+  if(frameCount >= TOTAL_FRAMES){
+    const pocketAngle = wAngle + targetIdx * SEG_A - Math.PI/2 + SEG_A * 0.5;
+    // Acercar suavemente la pelota al ángulo y radio del pocket
+    let angleDiff = ((pocketAngle - ballA) % (Math.PI*2) + Math.PI*2) % (Math.PI*2);
+    if(angleDiff > Math.PI) angleDiff -= Math.PI*2;
+    ballA += angleDiff * 0.12;
+    ballR += (POCKET_R - ballR) * 0.12;
+    ballVel *= 0.85;
+    wVel *= 0.92;
+    drawWheel(wAngle, ballA, ballR, true);
+    // Solo parar cuando esté muy cerca
+    if(Math.abs(angleDiff) < 0.015 && Math.abs(ballR - POCKET_R) < 0.5){
+      ballA = pocketAngle;
+      ballR = POCKET_R;
+      wVel  = 0;
+      spinning = false;
+      drawWheel(wAngle, ballA, ballR, true);
+      onResult();
+      return;
     }
-
-    /* Otherwise: gently steer ball toward pocket each frame */
-    ballA+=angDiff*0.055;
-    ballR+=radDiff*0.055;
-    ballVel*=0.85; /* kill angular velocity so ball stops orbiting */
     requestAnimationFrame(animate);
     return;
   }
@@ -1761,7 +1879,7 @@ function animate(){
   requestAnimationFrame(animate);
 }
 
-function onResult(){
+async function onResult(){
   const seg=SEGS[targetIdx];
   const numEl=document.getElementById('ball-num'),colEl=document.getElementById('ball-col');
   numEl.textContent=seg.n;
@@ -1771,7 +1889,7 @@ function onResult(){
   if(rouColor==='red'&&seg.c==='red'){won=true;payout=rouBet*2}
   else if(rouColor==='black'&&seg.c==='black'){won=true;payout=rouBet*2}
   else if(rouColor==='green'&&seg.c==='green'){won=true;payout=rouBet*14}
-  if(won){setBalance(getBalance()+payout);setBal();sndWin();showToast(`+$${payout.toFixed(2)} ¡Ganaste!`,'win');
+  if(won){await setBalance(getBalance()+payout);setBal();sndWin();showToast(`+$${payout.toFixed(2)} ¡Ganaste!`,'win');
     if(CU) recordWin(DB[CU].username, payout, 'roulette', true);
   }
   else{sndLose();showToast(`-$${rouBet.toFixed(2)}`,'lose')}
@@ -1791,9 +1909,14 @@ function pickColor(c){
   updateRouPayout();sndClick();
 }
 function updateRouPayout(){
-  const amt=parseFloat(document.getElementById('rou-amount').value)||0;
-  if(!rouColor||!amt){document.getElementById('rou-payout').textContent='—';return;}
-  document.getElementById('rou-payout').textContent='$'+(amt*(rouColor==='green'?14:2)).toFixed(2);
+  const inp = document.getElementById('rou-amount');
+  const el  = document.getElementById('rou-payout');
+  if(!inp || !el) return;
+  const amt = parseFloat(inp.value) || 0;
+  if(!rouColor || amt < 1){ el.textContent='—'; return; }
+  const mult   = rouColor==='green' ? 14 : 2;
+  const profit = (amt * mult).toFixed(2);
+  el.textContent = '$' + profit;
 }
 function rouAmt(op){
   const inp=document.getElementById('rou-amount');
@@ -1810,16 +1933,27 @@ function doSpin(){
   if(amt<1){showToast('Apuesta mínima $1','');return;}
   if(getBalance()<amt){showToast('Balance insuficiente','lose');return;}
   setBalance(getBalance()-amt);setBal();
-  rouBet=amt;animDone=false;
-  targetIdx=Math.floor(Math.random()*NS);
-  const d=0.9895,N=TOTAL_FRAMES,tf=(1-Math.pow(d,N))/(1-d);
+  rouBet=amt;
+  // Decidir ganancia/pérdida ANTES de la animación
+  const _win = shouldWin();
+  targetIdx = _win ? getWinningIdx() : getLosingIdx();
+  incrementUserSpins();
+
+  // velocidad de rueda: suma de vVel*0.988^k = totalAngular
+  // total giros = 6-9 vueltas más el ajuste al target
+  const d=0.988, N=TOTAL_FRAMES;
+  const tf=(1-Math.pow(d,N))/(1-d); // suma geométrica
   const wrapNow=((wAngle%(Math.PI*2))+Math.PI*2)%(Math.PI*2);
-  const desired=((Math.PI-targetIdx*SEG_A-SEG_A*0.5)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
+  const desired=((Math.PI - targetIdx*SEG_A - SEG_A*0.5)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
   let delta=(desired-wrapNow+Math.PI*2)%(Math.PI*2);
-  delta+=(5+Math.floor(Math.random()*4))*Math.PI*2;
+  delta+=(6+Math.floor(Math.random()*4))*Math.PI*2;
   wVel=delta/tf;
-  ballA=Math.random()*Math.PI*2;ballR=ROUT-14;
-  ballVel=-(wVel*1.35+0.04);
+
+  // pelota: arranca en borde externo, sentido contrario, más rápida que la rueda
+  ballA   = Math.random() * Math.PI * 2;
+  ballR   = ROUT - 10;
+  ballVel = -(wVel * 1.35); // bastante más rápida para efecto visual realista
+
   prevTickSeg=-1;frameCount=0;spinning=true;
   document.getElementById('spin-btn').disabled=true;
   document.getElementById('ball-num').textContent='—';
@@ -1938,7 +2072,6 @@ function mCashout(){
    ONLINE ROULETTE — Multijugador
    BroadcastChannel + localStorage sync
 ══════════════════════════════════════════ */
-const OL_STORE = 'cb_ol_rooms_v1';
 const OL_AVA   = ['#3b9eff','#ff4757','#ffc845','#00e701','#c56cff','#ff9f43','#1dd1a1','#ff6b9d'];
 
 let olMyId    = Math.random().toString(36).slice(2,10);
@@ -1950,59 +2083,58 @@ let olState   = null;
 let olMyColor = null;
 let olBetDone = false;
 
-function olLoadRooms(){ try{return JSON.parse(localStorage.getItem(OL_STORE)||'{}')}catch(e){return{}} }
-function olSaveRooms(r){ localStorage.setItem(OL_STORE,JSON.stringify(r)) }
-function olGenCode(){ return Math.random().toString(36).slice(2,6).toUpperCase() }
-
 function olMakeState(){
   return {phase:'waiting',timer:0,targetIdx:-1,bets:{},players:{},history:[]};
 }
 
-/* ── CREATE / JOIN ── */
-function olCreateRoom(){
+async function olLoadRooms(code){ 
+  try{ const d=await apiFetch('/api/rooms/'+code); return d.state||olMakeState(); }
+  catch(e){ return olMakeState(); }
+}
+async function olSaveRooms(code, state){ 
+  await apiFetch('/api/rooms',{ method:'POST', body:{ code, state } }); 
+}
+
+function olGenCode(){ return Math.random().toString(36).slice(2,6).toUpperCase() }
+
+async function olCreateRoom(){
   const name = document.getElementById('ol-create-name').value.trim();
   if(!name){document.getElementById('ol-create-err').textContent='Escribe tu nombre';return;}
   olRoomCode = olGenCode();
-  const rooms = olLoadRooms();
-  rooms[olRoomCode] = {created:Date.now(), state:olMakeState()};
-  olSaveRooms(rooms);
+  const state = olMakeState();
+  await olSaveRooms(olRoomCode, state);
   olEnter(name, true);
 }
 
-function olJoinRoom(){
+async function olJoinRoom(){
   const name = document.getElementById('ol-join-name').value.trim();
   const code = document.getElementById('ol-join-code').value.trim().toUpperCase();
   if(!name){document.getElementById('ol-join-err').textContent='Escribe tu nombre';return;}
   if(code.length<3){document.getElementById('ol-join-err').textContent='Código inválido';return;}
-  const rooms = olLoadRooms();
-  if(!rooms[code]){document.getElementById('ol-join-err').textContent='Sala no encontrada';return;}
+  const state = await olLoadRooms(code);
+  if(!state){document.getElementById('ol-join-err').textContent='Sala no encontrada';return;}
   olRoomCode = code;
   olEnter(name, false);
 }
 
-function olEnter(name, host){
+async function olEnter(name, host){
   olIsHost = host;
   olMyColor = null; olBetDone = false;
 
-  /* Show room UI */
   document.getElementById('ol-join').style.display = 'none';
   document.getElementById('ol-room').style.display = 'block';
   document.getElementById('ol-room-badge').childNodes[0].textContent = 'Sala '+olRoomCode+' ';
 
-  /* Load state */
-  const rooms = olLoadRooms();
-  olState = rooms[olRoomCode]?.state || olMakeState();
+  olState = await olLoadRooms(olRoomCode);
 
-  /* Add myself */
   const bal = CU ? getBalance() : 1000;
   const myName = name || (CU ? DB[CU].username : 'jugador');
   olState.players[olMyId] = {
     name: myName, balance: bal,
     avatarColor: OL_AVA[Object.keys(olState.players).length % OL_AVA.length]
   };
-  olPersist();
+  await olPersist();
 
-  /* Open channel */
   olChannel = new BroadcastChannel('cb_ol_'+olRoomCode);
   olChannel.onmessage = olOnMessage;
   olBroadcast({type:'join', id:olMyId, player:olState.players[olMyId]});
@@ -2021,14 +2153,13 @@ function olEnter(name, host){
   else olDisableBetting();
 }
 
-function olLeaveRoom(){
+async function olLeaveRoom(){
   if(olChannel){ olBroadcast({type:'leave',id:olMyId}); olChannel.close(); olChannel=null; }
   clearInterval(olHostInt); olHostInt=null;
-  const rooms=olLoadRooms();
-  if(rooms[olRoomCode]){
-    delete rooms[olRoomCode].state.players[olMyId];
-    delete rooms[olRoomCode].state.bets[olMyId];
-    olSaveRooms(rooms);
+  if(olRoomCode && olState){
+    delete olState.players[olMyId];
+    delete olState.bets[olMyId];
+    await olSaveRooms(olRoomCode, olState);
   }
   olRoomCode=''; olState=null; olMyColor=null; olBetDone=false;
   document.getElementById('ol-join').style.display='block';
@@ -2044,14 +2175,14 @@ function olCopyCode(){
 
 /* ── BROADCAST ── */
 function olBroadcast(msg){ if(olChannel) olChannel.postMessage({...msg,from:olMyId}); }
-function olPersist(){ const r=olLoadRooms(); if(!r[olRoomCode])r[olRoomCode]={};r[olRoomCode].state=olState;olSaveRooms(r); }
-function olPushState(){ olPersist(); olBroadcast({type:'state',state:olState}); }
+async function olPersist(){ await olSaveRooms(olRoomCode, olState); }
+async function olPushState(){ await olPersist(); olBroadcast({type:'state',state:olState}); }
 
-function olOnMessage(e){
+async function olOnMessage(e){
   const msg=e.data;
   if(msg.from===olMyId) return;
-  const rooms=olLoadRooms();
-  olState=rooms[olRoomCode]?.state||olState;
+  const s = await olLoadRooms(olRoomCode);
+  olState = s || olState;
   switch(msg.type){
     case 'join':
       olSysMsg(`${msg.player.name} se unió`);
@@ -2078,21 +2209,21 @@ function olHandleState(s){
 }
 
 /* ── HOST LOOP ── */
-function olHostTick(){
+async function olHostTick(){
   if(!olIsHost) return;
-  const rooms=olLoadRooms();
-  olState=rooms[olRoomCode]?.state||olState;
+  const s = await olLoadRooms(olRoomCode);
+  olState = s || olState;
   const pc=Object.keys(olState.players).length;
   if(olState.phase==='waiting'){
-    if(pc>=1){ olState.phase='betting'; olState.timer=20; olState.bets={}; olState.targetIdx=-1; olPushState(); }
+    if(pc>=1){ olState.phase='betting'; olState.timer=20; olState.bets={}; olState.targetIdx=-1; await olPushState(); }
   } else if(olState.phase==='betting'){
     olState.timer--;
-    if(olState.timer<=0){ olState.phase='spinning'; olState.targetIdx=Math.floor(Math.random()*OL_NS); olPushState(); olTriggerSpin(olState.targetIdx); }
-    else olPushState();
+    if(olState.timer<=0){ olState.phase='spinning'; olState.targetIdx=Math.floor(Math.random()*OL_NS); await olPushState(); olTriggerSpin(olState.targetIdx); }
+    else await olPushState();
   } else if(olState.phase==='result'){
     olState.timer--;
-    if(olState.timer<=0){ olState.phase='betting'; olState.timer=20; olState.bets={}; olPushState(); }
-    else olPushState();
+    if(olState.timer<=0){ olState.phase='betting'; olState.timer=20; olState.bets={}; await olPushState(); }
+    else await olPushState();
   }
 }
 
@@ -2118,18 +2249,18 @@ function olBetAmt(op){
   else v=bal;
   inp.value=Math.round(v); olUpdatePayout(); sndClick();
 }
-function olPlaceBet(){
+async function olPlaceBet(){
   if(olState.phase!=='betting'||olBetDone) return;
   if(!olMyColor){showToast('Elige un color','');return;}
   const amt=parseFloat(document.getElementById('ol-bet-amt').value)||0;
   const bal=CU?getBalance():1000;
   if(amt<1){showToast('Mínimo $1','');return;}
   if(bal<amt){showToast('Balance insuficiente','lose');return;}
-  if(CU){setBalance(getBalance()-amt);setBal();}
+  if(CU){await setBalance(getBalance()-amt);setBal();}
   if(olState.players[olMyId]) olState.players[olMyId].balance=(CU?getBalance():bal-amt);
   olState.bets[olMyId]={color:olMyColor,amount:amt};
   olBetDone=true;
-  olPersist();
+  await olPersist();
   olBroadcast({type:'bet',id:olMyId,color:olMyColor,amount:amt});
   document.getElementById('ol-my-bet-lbl').textContent=`$${amt} — ${olMyColor}`;
   document.getElementById('ol-my-bet-lbl').style.color={red:'var(--red)',black:'#9ab',green:'var(--green)'}[olMyColor];
@@ -2385,7 +2516,7 @@ function olTriggerSpin(idx){
   olAnimId = requestAnimationFrame(olAnimate);
 }
 
-function olOnSpinEnd(){
+async function olOnSpinEnd(){
   /* Reset launch guard for next round */
   olSpinLaunched = false;
 
@@ -2412,7 +2543,7 @@ function olOnSpinEnd(){
     });
     olState.phase  = 'result';
     olState.timer  = 6;
-    olPushState();
+    await olPushState();
   }
 }
 
@@ -2427,16 +2558,14 @@ function olIdleLoop(){
 olIdleLoop();
 
 /* Sync poll for all players */
-setInterval(()=>{
+setInterval(async ()=>{
   if(!olRoomCode || !olState) return;
-  const rooms=olLoadRooms();
-  const s=rooms[olRoomCode]?.state;
+  const s = await olLoadRooms(olRoomCode);
   if(!s) return;
   const prev=olState.phase;
   olState=s;
   if(s.phase !== prev) olOnPhaseChange(s.phase, prev);
   olRenderPlayers(); olUpdateUI();
-  /* Trigger spin only if phase just became spinning AND we haven't launched yet */
   if(s.phase==='spinning' && !olSpinLaunched && s.targetIdx >= 0){
     olTriggerSpin(s.targetIdx);
   }
@@ -2445,72 +2574,44 @@ setInterval(()=>{
   }
 }, 900);
 /* ══════════════════════════════════════════
-   WINNERS & LEADERBOARD SYSTEM
+   WINNERS & LEADERBOARD SYSTEM — via API
 ══════════════════════════════════════════ */
-const WINNERS_KEY = 'cb_winners_v1';
 const AVA_COLORS  = ['#3b9eff','#ff4757','#ffc845','#00e701','#c56cff','#ff9f43','#1dd1a1','#ff6b9d'];
 
-function loadWinners(){
-  try{ return JSON.parse(localStorage.getItem(WINNERS_KEY)||'{"recent":[],"leaderboard":{}}'); }
-  catch(e){ return {recent:[],leaderboard:{}}; }
-}
-function saveWinners(w){ localStorage.setItem(WINNERS_KEY, JSON.stringify(w)); }
-
-/* Call this every time a player wins/plays */
-function recordWin(username, amount, game, won){
-  const w = loadWinners();
-
-  /* Recent: store last 50 plays (wins only shown if won) */
-  if(won){
-    w.recent.unshift({
-      user: username,
-      amount: amount,
-      game: game,
-      ts: Date.now()
-    });
-    if(w.recent.length > 50) w.recent = w.recent.slice(0,50);
-
-    /* Leaderboard: accumulate total winnings per user */
-    if(!w.leaderboard[username]){
-      w.leaderboard[username] = {
-        total: 0, wins: 0,
-        color: AVA_COLORS[Object.keys(w.leaderboard).length % AVA_COLORS.length]
-      };
-    }
-    w.leaderboard[username].total += amount;
-    w.leaderboard[username].wins  += 1;
-  }
-
-  saveWinners(w);
+async function recordWin(username, amount, game, won){
+  await apiFetch('/api/wins', { method:'POST', body:{ username, amount, game, won } });
   renderWinners();
 }
 
-function renderWinners(){
-  const w = loadWinners();
-
-  /* ── Recent wins ── */
+async function renderWinners(){
   const recentEl = document.getElementById('recent-winners');
   const countEl  = document.getElementById('recent-count');
   if(!recentEl) return;
 
-  if(w.recent.length === 0){
+  const [recent, leaderboard] = await Promise.all([
+    apiFetch('/api/wins/recent'),
+    apiFetch('/api/wins/leaderboard')
+  ]);
+
+  /* ── Recent wins ── */
+  if(!recent.length){
     recentEl.innerHTML = '<div class="winner-empty">Aún no hay jugadas registradas.<br>¡Juega para aparecer aquí!</div>';
     if(countEl) countEl.textContent = '0 jugadas';
   } else {
-    if(countEl) countEl.textContent = w.recent.length + ' jugada' + (w.recent.length!==1?'s':'');
-    const gameLabels = {roulette:'Ruleta', mines:'Buscaminas', 'roulette-online':'Ruleta Online'};
+    if(countEl) countEl.textContent = recent.length + ' jugada' + (recent.length!==1?'s':'');
+    const gameLabels  = {roulette:'Ruleta', mines:'Buscaminas', 'roulette-online':'Ruleta Online'};
     const gameClasses = {roulette:'wgt-rou', mines:'wgt-mines', 'roulette-online':'wgt-rou-online'};
-    recentEl.innerHTML = w.recent.slice(0,20).map(entry => {
-      const ini = entry.user.slice(0,2).toUpperCase();
-      const color = getAvatarColor(entry.user);
-      const timeAgo = formatTimeAgo(entry.ts);
+    recentEl.innerHTML = recent.slice(0,20).map(entry => {
+      const ini = entry.username.slice(0,2).toUpperCase();
+      const color = getAvatarColor(entry.username);
+      const timeAgo = formatTimeAgo(new Date(entry.ts).getTime());
       const gameLabel = gameLabels[entry.game] || entry.game;
       const gameClass = gameClasses[entry.game] || 'wgt-rou';
       return `
         <div class="winner-row">
           <div class="winner-ava" style="background:${color}20;color:${color};border:1px solid ${color}40">${ini}</div>
           <div class="winner-info">
-            <div class="winner-name">${esc(entry.user)}</div>
+            <div class="winner-name">${esc(entry.username)}</div>
             <div class="winner-meta">${timeAgo}</div>
           </div>
           <div class="winner-right">
@@ -2523,9 +2624,9 @@ function renderWinners(){
 
   /* ── Ticker ── */
   const tickerEl = document.getElementById('ticker-text');
-  if(tickerEl && w.recent.length > 0){
-    const items = w.recent.slice(0,10).map(e =>
-      `🏆 ${e.user} ganó $${e.amount.toFixed(0)} en ${({roulette:'Ruleta',mines:'Buscaminas','roulette-online':'Ruleta Online'})[e.game]||e.game}`
+  if(tickerEl && recent.length > 0){
+    const items = recent.slice(0,10).map(e =>
+      `🏆 ${e.username} ganó $${e.amount.toFixed(0)} en ${({roulette:'Ruleta',mines:'Buscaminas','roulette-online':'Ruleta Online'})[e.game]||e.game}`
     );
     const doubled = [...items,...items].join('   ·   ');
     tickerEl.textContent = doubled;
@@ -2535,17 +2636,13 @@ function renderWinners(){
   const topEl = document.getElementById('top-winners');
   if(!topEl) return;
 
-  const sorted = Object.entries(w.leaderboard)
-    .sort((a,b) => b[1].total - a[1].total)
-    .slice(0,10);
-
-  if(sorted.length === 0){
+  if(!leaderboard.length){
     topEl.innerHTML = '<div class="winner-empty">Sin datos aún.<br>¡Sé el primero en ganar grande!</div>';
   } else {
     const rankSymbols = ['👑','🥈','🥉'];
-    const rankClasses = ['gold','silver','bronze'];
-    topEl.innerHTML = sorted.map(([user, data], i) => {
-      const color = data.color || getAvatarColor(user);
+    topEl.innerHTML = leaderboard.map((entry, i) => {
+      const user  = entry._id;
+      const color = getAvatarColor(user);
       const ini   = user.slice(0,2).toUpperCase();
       const rank  = i < 3 ? `<span style="font-size:16px">${rankSymbols[i]}</span>` : `<span class="winner-rank">#${i+1}</span>`;
       return `
@@ -2554,10 +2651,10 @@ function renderWinners(){
           <div class="winner-ava" style="background:${color}20;color:${color};border:1px solid ${color}40">${ini}</div>
           <div class="winner-info">
             <div class="winner-name">${esc(user)}</div>
-            <div class="winner-meta">${data.wins} victoria${data.wins!==1?'s':''}</div>
+            <div class="winner-meta">${entry.wins} victoria${entry.wins!==1?'s':''}</div>
           </div>
           <div class="winner-right">
-            <div class="winner-amount">$${data.total.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+            <div class="winner-amount">$${entry.total.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
           </div>
         </div>`;
     }).join('');
@@ -2587,6 +2684,705 @@ setInterval(()=>{ if(document.getElementById('game-home')?.classList.contains('a
 
 /* init */
 buildGrid(false);resetStats();renderWinners();
+
+
+/* ══════════════════════════════════════════
+   BOMBPARTY — Cliente
+══════════════════════════════════════════ */
+
+// Sílabas en español (300+)
+const BP_SYLLABLES = [
+  'AL','AR','AN','AS','ATE','ABA','ADO','AGO','AJO','ALA','AMA','ANA','APA','ARA','ATA','AVA',
+  'BA','BE','BI','BO','BU','BRA','BRE','BRI','BRO','BRU',
+  'CA','CE','CI','CO','CU','CLA','CLE','CLI','CLO','CLU','CRA','CRE','CRI','CRO',
+  'DA','DE','DI','DO','DU','DRA','DRE','DRI','DRO',
+  'EL','EN','ES','EST','ERA','ERO',
+  'FA','FE','FI','FO','FU','FRA','FRE','FRI','FRO',
+  'GA','GE','GI','GO','GU','GRA','GRE','GRI','GRO',
+  'HA','HE','HI','HO','HU',
+  'IA','IE','IO','IS','IT',
+  'JA','JE','JI','JO','JU',
+  'LA','LE','LI','LO','LU',
+  'MA','ME','MI','MO','MU',
+  'NA','NE','NI','NO','NU',
+  'OB','OC','OF','OL','ON','OR','OS',
+  'PA','PE','PI','PO','PU','PLA','PLE','PLI','PRA','PRE','PRI','PRO',
+  'QUE','QUI',
+  'RA','RE','RI','RO','RU',
+  'SA','SE','SI','SO','SU',
+  'TA','TE','TI','TO','TU','TRA','TRE','TRI','TRO',
+  'UN','UR','US',
+  'VA','VE','VI','VO','VU',
+  'YA','YO',
+  'ZA','ZO','ZU',
+  'CAR','COR','TER','MEN','VEN','PER','SER','TEN','HAR','CAN','MAN','SAN','BAN','LAN','PAN','TAN',
+  'RAN','DAN','FAN','VAN','GAN','JAN','QUE','SIN','CON','MON','SON','DON','BON','TON',
+  'LES','MES','VES','DES','TES','RES','BES','PES','FES','GES','CES','NES',
+  'CION','ANDO','ENDO','ANDO','MENTE','ADOR','ADOR'
+];
+
+// Estado del juego BombParty
+let bpState = {
+  roomCode: null,
+  isHost: false,
+  phase: 'join', // join | lobby | game
+  players: [],   // [{username, lives, alive}]
+  currentTurn: null,
+  syllable: '',
+  usedWords: [],
+  timeLeft: 0,
+  maxTime: 12,
+  winner: null,
+  pot: 0
+};
+
+let bpPollInterval = null;
+let bpTimerInterval = null;
+let bpLastStateHash = '';
+
+// ── Helpers ──────────────────────────────────────────────────────────────
+function bpRandSyllable(){
+  return BP_SYLLABLES[Math.floor(Math.random() * BP_SYLLABLES.length)];
+}
+function bpMakeCode(){
+  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ';
+  return Array.from({length:5},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
+}
+function bpHash(obj){ return JSON.stringify(obj); }
+
+function bpShowScreen(id){
+  ['bp-screen-join','bp-screen-lobby','bp-screen-game'].forEach(s=>{
+    const el=document.getElementById(s);
+    if(el) el.style.display = s===id?'':'none';
+  });
+}
+
+
+
+// ── API rooms using existing /api/rooms endpoint ──────────────────────────
+async function bpPushState(state){
+  await apiFetch('/api/rooms', {method:'POST', body:{code:'bp_'+bpState.roomCode, state}});
+}
+async function bpPullState(){
+  try{
+    const d = await apiFetch('/api/rooms/bp_'+bpState.roomCode);
+    return d.state || null;
+  }catch(e){ return null; }
+}
+
+// ── Create / Join ─────────────────────────────────────────────────────────
+async function bpCreate(){
+  if(!CU){ showToast('Inicia sesión primero',''); return; }
+  const code = bpMakeCode();
+  bpState.roomCode = code;
+  bpState.isHost = true;
+  const initState = {
+    phase:'lobby',
+    host: CU,
+    players:[{username:CU, lives:3, alive:true}],
+    currentTurn: CU,
+    syllable: bpRandSyllable(),
+    usedWords:[],
+    bets:{[CU]:0},
+    pot:0,
+    winner:null,
+    lastAction: Date.now()
+  };
+  await bpPushState(initState);
+  bpEnterLobby(initState);
+}
+
+async function bpJoin(){
+  if(!CU){ showToast('Inicia sesión primero',''); return; }
+  const code = document.getElementById('bp-room-input').value.trim().toUpperCase();
+  const err = document.getElementById('bp-join-err');
+  if(!code){ err.textContent='Ingresa un código de sala.'; return; }
+  err.textContent='';
+  const st = await apiFetch('/api/rooms/bp_'+code).catch(()=>null);
+  if(!st || st.error){ err.textContent='Sala no encontrada.'; return; }
+  if(st.state?.phase==='game'){ err.textContent='La partida ya comenzó.'; return; }
+  if(st.state?.players?.find(p=>p.username===CU)){ 
+    // ya estaba, re-entrar
+    bpState.roomCode=code;
+    bpState.isHost=(st.state.host===CU);
+    if(st.state.phase==='lobby') bpEnterLobby(st.state);
+    else bpEnterGame(st.state);
+    return;
+  }
+  // Add ourselves
+  const newState = {...st.state};
+  newState.players = [...(newState.players||[]), {username:CU, lives:3, alive:true}];
+  newState.lastAction = Date.now();
+  bpState.roomCode=code;
+  bpState.isHost=false;
+  await bpPushState(newState);
+  bpEnterLobby(newState);
+}
+
+function bpEnterLobby(st){
+  bpState.phase='lobby';
+  bpShowScreen('bp-screen-lobby');
+  document.getElementById('bp-lobby-code').textContent = bpState.roomCode;
+  document.getElementById('bp-copy-code').textContent = bpState.roomCode;
+  // Restore our previous bet if we had one
+  const savedBet=(st.bets||{})[CU]||0;
+  const betInput=document.getElementById('bp-bet-amount');
+  if(betInput && savedBet>0) betInput.value=savedBet;
+  bpRenderLobby(st);
+  bpStartPolling();
+}
+
+function bpRenderLobby(st){
+  const list = document.getElementById('bp-waiting-list');
+  if(!list) return;
+  const bets = st.bets||{};
+  list.innerHTML = (st.players||[]).map(p=>{
+    const bet=bets[p.username]||0;
+    return `<div class="bp-waiting-player">
+      <span>${esc(p.username)}${p.username===st.host?' <span class="host-tag">HOST</span>':''}</span>
+      <span class="bp-player-bet">${bet>0?'$'+bet.toFixed(2):'Sin apuesta'}</span>
+    </div>`;
+  }).join('');
+  const pot = Object.values(bets).reduce((a,b)=>a+b,0);
+  bpRenderPot(pot);
+  const startBtn = document.getElementById('bp-start-btn');
+  if(startBtn){
+    const allBet = (st.players||[]).every(p=>(bets[p.username]||0)>0);
+    const canStart = st.players?.length>=2 && st.host===CU && allBet;
+    startBtn.disabled = !canStart;
+    startBtn.textContent = st.players?.length<2
+      ? `Esperando jugadores… (${st.players?.length}/2 mín.)`
+      : !allBet
+        ? `Todos deben apostar para iniciar`
+        : (st.host===CU ? `¡Iniciar partida! Pozo: $${pot.toFixed(2)}` : `Esperando al host…`);
+  }
+}
+
+function bpCopyCode(){
+  navigator.clipboard?.writeText(bpState.roomCode).then(()=>showToast('Código copiado','win'));
+}
+
+function bpUpdateBet(){
+  // Debounce: push our bet to state so others see it
+  clearTimeout(bpUpdateBet._t);
+  bpUpdateBet._t = setTimeout(async()=>{
+    const amt = parseFloat(document.getElementById('bp-bet-amount')?.value)||0;
+    const st = await bpPullState();
+    if(!st) return;
+    const newState={...st};
+    newState.bets = {...(st.bets||{}), [CU]: amt};
+    newState.pot = Object.values(newState.bets).reduce((a,b)=>a+b,0);
+    await bpPushState(newState);
+    bpRenderPot(newState.pot);
+  }, 600);
+}
+
+function bpRenderPot(pot){
+  const el1=document.getElementById('bp-pot-display');
+  const el2=document.getElementById('bp-game-pot');
+  const fmt='$'+Number(pot||0).toFixed(2);
+  if(el1) el1.textContent=fmt;
+  if(el2) el2.textContent=fmt;
+}
+
+async function bpStart(){
+  const st = await bpPullState();
+  if(!st) return;
+  const bets=st.bets||{};
+  const pot=Object.values(bets).reduce((a,b)=>a+b,0);
+  // Fetch fresh balances from server for all players and validate
+  for(const p of st.players){
+    const bet=bets[p.username]||0;
+    if(bet<=0){ showToast(`${p.username} no ha apostado`,''); return; }
+    const userData = await apiFetch('/api/login/session?username='+encodeURIComponent(p.username));
+    if(!userData?.user){ showToast(`No se pudo verificar balance de ${p.username}`,''); return; }
+    if(userData.user.balance < bet){ showToast(`${p.username} no tiene suficiente balance ($${userData.user.balance.toFixed(2)} < $${bet})`,'lose'); return; }
+    // Cache it
+    DB[p.username] = userData.user;
+  }
+  // Deduct from all players
+  for(const p of st.players){
+    const bet=bets[p.username]||0;
+    const newBal=(DB[p.username]?.balance||0)-bet;
+    await apiFetch(`/api/users/${p.username}/balance`,{method:'PUT',body:{balance:newBal}});
+    if(DB[p.username]) DB[p.username].balance=newBal;
+  }
+  if(CU && DB[CU]) setBal();
+  const newState = {...st,
+    phase:'game',
+    players: st.players.map(p=>({...p,lives:3,alive:true})),
+    usedWords:[],
+    pot,
+    bets,
+    syllable: bpRandSyllable(),
+    currentTurn: st.players[0].username,
+    turnStart: Date.now(),
+    maxTime: 12,
+    winner: null,
+    lastAction: Date.now()
+  };
+  await bpPushState(newState);
+}
+
+// ── Game loop ─────────────────────────────────────────────────────────────
+function bpEnterGame(st){
+  bpState.phase='game';
+  bpShowScreen('bp-screen-game');
+  bpApplyState(st);
+}
+
+function bpApplyState(st){
+  if(!st) return;
+  bpState.players = st.players||[];
+  bpState.currentTurn = st.currentTurn;
+  bpState.syllable = st.syllable;
+  bpState.usedWords = st.usedWords||[];
+  bpState.winner = st.winner;
+  bpState.maxTime = st.maxTime||12;
+  bpState.turnStart = st.turnStart||Date.now();
+  bpState.pot = st.pot||0;
+
+  bpRenderPlayers();
+  bpRenderArena();
+  bpRenderPot(bpState.pot);
+  bpRenderUsedWords();
+
+  if(st.winner){
+    bpShowResult(st.winner);
+  } else {
+    document.getElementById('bp-result-overlay').style.display='none';
+    bpStartTimer();
+  }
+}
+
+function bpRenderPlayers(){
+  const all = bpState.players;
+  const half = Math.ceil(all.length/2);
+  const left = all.slice(0,half);
+  const right = all.slice(half);
+  const render = (arr) => arr.map((p,i)=>{
+    const isActive = p.username===bpState.currentTurn && !bpState.winner;
+    const hearts = '❤️'.repeat(p.lives) + '<span class="bp-life lost">❤️</span>'.repeat(Math.max(0,3-p.lives));
+    return `<div class="bp-player ${!p.alive?'dead':''} ${isActive?'active':''}" id="bpp-${p.username}">
+      <div class="bp-player-avatar">${p.username[0].toUpperCase()}</div>
+      <div class="bp-player-info">
+        <div class="bp-player-name">${esc(p.username)}</div>
+        <div class="bp-player-lives">${hearts}</div>
+      </div>
+      ${isActive?'<div class="bp-turn-tag">TURNO</div>':''}
+    </div>`;
+  }).join('');
+  document.getElementById('bp-players-left').innerHTML = render(left);
+  // Use right panel players list (insert in right col)
+  // actually we just use left for all players since layout supports it
+  // Append right-side players to left column too for simplicity
+  document.getElementById('bp-players-left').innerHTML = render(all);
+}
+
+function bpRenderArena(){
+  const syl = document.getElementById('bp-syllable');
+  const phase = document.getElementById('bp-phase-label');
+  const input = document.getElementById('bp-word-input');
+  if(syl) syl.textContent = bpState.syllable;
+  const isMyTurn = bpState.currentTurn===CU && !bpState.winner;
+  if(phase) phase.textContent = bpState.winner ? '¡Partida terminada!' :
+    (isMyTurn ? '¡Es tu turno!' : `Turno de ${bpState.currentTurn}`);
+  if(input){
+    input.disabled = !isMyTurn;
+    input.value='';
+    input.className='bp-input';
+    document.getElementById('bp-feedback').textContent='';
+    document.getElementById('bp-feedback').className='bp-feedback';
+    if(isMyTurn) setTimeout(()=>input.focus(),100);
+  }
+}
+
+function bpRenderUsedWords(){
+  const el=document.getElementById('bp-used-words');
+  if(!el) return;
+  if(!bpState.usedWords.length){
+    el.innerHTML='<span style="font-size:11px;color:var(--muted)">Ninguna aún</span>';
+    return;
+  }
+  el.innerHTML=bpState.usedWords.slice(-20).reverse().map(w=>
+    `<span class="bp-used-tag">${esc(w)}</span>`
+  ).join('');
+}
+
+// ── Timer ─────────────────────────────────────────────────────────────────
+function bpStartTimer(){
+  clearInterval(bpTimerInterval);
+  const ring = document.getElementById('bp-timer-ring');
+  const timeEl = document.getElementById('bp-bomb-time');
+  const spark = document.getElementById('bp-spark');
+
+  bpTimerInterval = setInterval(()=>{
+    const elapsed = (Date.now() - bpState.turnStart)/1000;
+    const remaining = Math.max(0, bpState.maxTime - elapsed);
+    const pct = remaining / bpState.maxTime;
+    const offset = 283 * (1-pct);
+    if(ring){
+      ring.style.strokeDashoffset = offset;
+      ring.style.stroke = pct<0.35 ? 'var(--red)' : 'var(--accent)';
+    }
+    if(timeEl) timeEl.textContent = Math.ceil(remaining)+'s';
+    if(spark) spark.style.fill = pct<0.35 ? '#fff' : '#ff4757';
+
+    // If it's our turn and time ran out, we explode
+    if(remaining<=0 && bpState.currentTurn===CU && !bpState.winner && bpState.phase==='game'){
+      clearInterval(bpTimerInterval);
+      bpExplode();
+    }
+  }, 100);
+}
+
+// ── Word submission ───────────────────────────────────────────────────────
+function bpKeyDown(e){
+  if(e.key==='Enter') bpSubmit();
+}
+
+function bpInputChange(){
+  const input=document.getElementById('bp-word-input');
+  const fb=document.getElementById('bp-feedback');
+  const word=input.value.trim().toLowerCase();
+  if(!word){ input.className='bp-input'; fb.textContent=''; return; }
+  const hasSyl = word.includes(bpState.syllable.toLowerCase());
+  if(hasSyl && word.length>2){
+    input.className='bp-input valid';
+    fb.textContent='✓ Contiene la sílaba';
+    fb.className='bp-feedback ok';
+  } else {
+    input.className='bp-input';
+    fb.textContent='';
+    fb.className='bp-feedback';
+  }
+}
+
+async function bpSubmit(){
+  const input=document.getElementById('bp-word-input');
+  const fb=document.getElementById('bp-feedback');
+  const word=input.value.trim().toLowerCase().replace(/[^a-záéíóúüñ]/gi,'');
+  if(!word || bpState.currentTurn!==CU || bpState.winner) return;
+
+  // Validate
+  if(word.length<2){
+    bpInvalidWord('Muy corta'); return;
+  }
+  if(!word.includes(bpState.syllable.toLowerCase())){
+    bpInvalidWord('No contiene la sílaba'); return;
+  }
+  if(bpState.usedWords.includes(word)){
+    bpInvalidWord('Ya usada'); return;
+  }
+
+  // Valid! Push state
+  input.className='bp-input valid';
+  fb.textContent='✓ ¡Correcto!';
+  fb.className='bp-feedback ok';
+  await bpAdvanceTurn(word);
+}
+
+function bpInvalidWord(reason){
+  const input=document.getElementById('bp-word-input');
+  const fb=document.getElementById('bp-feedback');
+  input.className='bp-input invalid';
+  fb.textContent='✗ '+reason;
+  fb.className='bp-feedback err';
+  setTimeout(()=>{ input.className='bp-input'; fb.textContent=''; fb.className='bp-feedback'; }, 700);
+}
+
+async function bpAdvanceTurn(word){
+  const st = await bpPullState();
+  if(!st || st.currentTurn!==CU) return; // someone else already moved
+
+  const newState = {...st};
+  newState.usedWords = [...(st.usedWords||[]), word];
+
+  // Next player
+  const alive = newState.players.filter(p=>p.alive);
+  const idx = alive.findIndex(p=>p.username===CU);
+  const nextPlayer = alive[(idx+1)%alive.length];
+  newState.currentTurn = nextPlayer.username;
+  newState.syllable = bpRandSyllable();
+  newState.turnStart = Date.now();
+  // Slightly shorten time each round (min 5s)
+  newState.maxTime = Math.max(5, (st.maxTime||12) - 0.2);
+  newState.lastAction = Date.now();
+
+  await bpPushState(newState);
+}
+
+async function bpExplode(){
+  const st = await bpPullState();
+  if(!st || st.winner) return;
+
+  const newState = {...st};
+  // Lose a life
+  const pidx = newState.players.findIndex(p=>p.username===CU);
+  if(pidx>=0){
+    newState.players[pidx].lives--;
+    if(newState.players[pidx].lives<=0){
+      newState.players[pidx].alive=false;
+    } else {
+    }
+  }
+
+  // Flash exploded style
+  const pEl=document.getElementById('bpp-'+CU);
+  if(pEl){ pEl.classList.add('exploded'); setTimeout(()=>pEl.classList.remove('exploded'),600); }
+
+  // Check winner
+  const alive = newState.players.filter(p=>p.alive);
+  if(alive.length===1){
+    newState.winner=alive[0].username;
+    newState.phase='result';
+  } else {
+    // Next player after me
+    const myIdx=alive.findIndex(p=>p.username!==CU&&p.alive)||0;
+    const nextAlive=alive.find(p=>p.username!==CU&&p.alive)||alive[0];
+    newState.currentTurn=nextAlive?.username||alive[0]?.username;
+    newState.syllable=bpRandSyllable();
+    newState.turnStart=Date.now();
+    newState.maxTime=Math.max(5,(st.maxTime||12));
+  }
+  newState.lastAction=Date.now();
+  await bpPushState(newState);
+}
+
+async function bpShowResult(winner){
+  clearInterval(bpTimerInterval);
+  const overlay=document.getElementById('bp-result-overlay');
+  const title=document.getElementById('bp-result-title');
+  const sub=document.getElementById('bp-result-sub');
+  const potEl=document.getElementById('bp-result-pot');
+  if(!overlay) return;
+  overlay.style.display='flex';
+  const pot=bpState.pot||0;
+  if(winner===CU){
+    title.textContent='🏆 ¡Ganaste!';
+    title.style.color='var(--gold2)';
+    sub.textContent='Eres el último en pie. ¡Te llevas el pozo!';
+    if(potEl){ potEl.textContent='+$'+pot.toFixed(2); potEl.style.display='block'; }
+    // Credit winner
+    if(!bpState._potAwarded){
+      bpState._potAwarded=true;
+      const newBal=(DB[CU]?.balance||0)+pot;
+      await apiFetch(`/api/users/${CU}/balance`,{method:'PUT',body:{balance:newBal}});
+      if(DB[CU]) DB[CU].balance=newBal;
+      setBal();
+      recordWin(CU, pot, 'bombparty', true);
+    }
+  } else {
+    title.textContent='💣 Perdiste';
+    title.style.color='var(--red)';
+    sub.textContent=`${winner} ganó el pozo de $${pot.toFixed(2)}.`;
+    if(potEl){ potEl.style.display='none'; }
+  }
+}
+
+async function bpPlayAgain(){
+  if(!bpState.isHost){ showToast('Solo el host puede reiniciar',''); return; }
+  bpState._potAwarded=false;
+  // Return to lobby so players can set new bets
+  const st=await bpPullState();
+  if(!st) return;
+  const newState={...st,
+    phase:'lobby',
+    bets:{},
+    pot:0,
+    winner:null,
+    lastAction:Date.now()
+  };
+  await bpPushState(newState);
+}
+
+async function bpLeave(){
+  clearInterval(bpPollInterval);
+  clearInterval(bpTimerInterval);
+  // Remove ourselves from room if in lobby
+  if(bpState.phase==='lobby'){
+    try{
+      const st=await bpPullState();
+      if(st){
+        st.players=st.players.filter(p=>p.username!==CU);
+        if(st.players.length===0){
+          await apiFetch('/api/rooms/bp_'+bpState.roomCode,{method:'DELETE'});
+        } else {
+          if(st.host===CU) st.host=st.players[0].username;
+          await bpPushState(st);
+        }
+      }
+    }catch(e){}
+  }
+  bpState={roomCode:null,isHost:false,phase:'join',players:[],currentTurn:null,syllable:'',usedWords:[],winner:null,pot:0,_potAwarded:false};
+  bpShowScreen('bp-screen-join');
+  document.getElementById('bp-room-input').value='';
+  document.getElementById('bp-join-err').textContent='';
+}
+
+// ── Polling ───────────────────────────────────────────────────────────────
+function bpStartPolling(){
+  clearInterval(bpPollInterval);
+  bpPollInterval = setInterval(async()=>{
+    const st=await bpPullState();
+    if(!st) return;
+    const hash=bpHash(st);
+    if(hash===bpLastStateHash) return;
+    bpLastStateHash=hash;
+
+    if(st.phase==='lobby' && bpState.phase==='lobby'){
+      bpState.isHost=(st.host===CU);
+      bpRenderLobby(st);
+    } else if(st.phase==='lobby' && bpState.phase==='game'){
+      // Host reset to lobby for new round
+      bpState._potAwarded=false;
+      bpState.phase='lobby';
+      bpShowScreen('bp-screen-lobby');
+      const betInput=document.getElementById('bp-bet-amount');
+      if(betInput) betInput.value='';
+      bpRenderLobby(st);
+    } else if(st.phase==='game' && bpState.phase==='lobby'){
+      bpEnterGame(st);
+    } else if((st.phase==='game'||st.phase==='result') && bpState.phase==='game'){
+      bpApplyState(st);
+    }
+  }, 1500);
+}
+
+/* ══ END BOMBPARTY ══ */
+
+/* Restaurar sesión al recargar */
+(async function restoreSession(){
+  const saved = localStorage.getItem('cb_session_user');
+  if(!saved){
+    // No session saved, show login normally
+    document.getElementById('scr-login').style.display = '';
+    return;
+  }
+  try {
+    const data = await apiFetch('/api/login/session?username=' + encodeURIComponent(saved));
+    if(data && data.user){
+      CU = data.user.username;
+      DB[CU] = data.user;
+      document.querySelectorAll('.auth-screen').forEach(s=>s.classList.add('hidden'));
+      applyUserToUI();
+      switchTab('home', document.getElementById('tab-home'));
+    } else {
+      localStorage.removeItem('cb_session_user');
+      document.getElementById('scr-login').style.display = '';
+    }
+  } catch(e){
+    localStorage.removeItem('cb_session_user');
+    document.getElementById('scr-login').style.display = '';
+  }
+})();
 </script>
+
+<!-- ══════ BOMBPARTY ══════ -->
+<div id="game-bombparty" class="game">
+  <div id="bp-screen-join" style="">
+    <div class="bp-lobby">
+      <div class="bp-lobby-title">💣 <span>BombParty</span></div>
+      <p style="font-size:13px;color:var(--muted);text-align:center;line-height:1.6">Di una palabra en español que contenga la sílaba mostrada antes de que explote la bomba. ¡El último en pie gana!</p>
+      <div class="field">
+        <label>Código de sala</label>
+        <div style="display:flex;gap:8px">
+          <input class="field input" id="bp-room-input" type="text" placeholder="ej: FUEGO" maxlength="8" style="text-transform:uppercase;letter-spacing:.1em;flex:1;background:var(--bg);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:11px 14px;outline:none">
+          <button class="new-game-btn" style="width:auto;padding:11px 20px;flex-shrink:0" onclick="bpJoin()">Unirse</button>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;color:var(--muted);font-size:11px">
+        <div style="flex:1;height:1px;background:var(--border2)"></div>o<div style="flex:1;height:1px;background:var(--border2)"></div>
+      </div>
+      <button class="new-game-btn" onclick="bpCreate()">Crear nueva sala</button>
+      <div id="bp-join-err" style="font-size:12px;color:var(--red);text-align:center;min-height:16px"></div>
+    </div>
+  </div>
+
+  <div id="bp-screen-lobby" style="display:none">
+    <div class="bp-lobby">
+      <div class="bp-lobby-title">💣 Sala <span id="bp-lobby-code">—</span></div>
+      <div style="font-size:12px;color:var(--muted);text-align:center">Comparte este código con tus amigos</div>
+      <div class="bp-room-code" id="bp-copy-code" onclick="bpCopyCode()" title="Clic para copiar">——</div>
+      <div class="field">
+        <label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:4px;display:block">Tu apuesta</label>
+        <input class="bp-bet-input" id="bp-bet-amount" type="number" min="1" placeholder="Ej: 100" oninput="bpUpdateBet()">
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">El ganador se lleva todo el pozo</div>
+      </div>
+      <div>
+        <div class="bp-pot-label">Pozo actual 🏆</div>
+        <div class="bp-pot-display" id="bp-pot-display">$0</div>
+      </div>
+      <div class="bp-waiting-list" id="bp-waiting-list"></div>
+      <div id="bp-start-wrap">
+        <button class="bp-start-btn" id="bp-start-btn" onclick="bpStart()" disabled>Esperando jugadores… (mín. 2)</button>
+      </div>
+      <button class="auth-btn secondary" onclick="bpLeave()">← Salir de la sala</button>
+    </div>
+  </div>
+
+  <div id="bp-screen-game" style="display:none;position:relative">
+    <div class="bp-layout">
+      <!-- Left: players col 1 -->
+      <div class="bp-players" id="bp-players-left"></div>
+
+      <!-- Center arena -->
+      <div class="bp-arena">
+        <div class="bp-phase" id="bp-phase-label">Esperando…</div>
+        <div class="bp-bomb">
+          <svg class="bp-bomb-svg" viewBox="0 0 110 110">
+            <!-- Background ring -->
+            <circle cx="55" cy="55" r="45" fill="none" stroke="var(--surface3)" stroke-width="5"/>
+            <!-- Timer ring -->
+            <circle id="bp-timer-ring" class="bp-timer-ring" cx="55" cy="55" r="45"
+              fill="none" stroke-width="5" stroke-linecap="round"
+              transform="rotate(-90 55 55)"
+              style="stroke-dasharray:283;stroke-dashoffset:0"/>
+            <!-- Bomb body -->
+            <circle cx="55" cy="60" r="28" fill="#1a1008" stroke="#f0a500" stroke-width="1.5"/>
+            <!-- Fuse -->
+            <path d="M55 32 Q65 22 72 16" stroke="#888" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <circle id="bp-spark" cx="72" cy="16" r="4" fill="#ff4757"/>
+            <!-- Face -->
+            <circle cx="47" cy="58" r="2.5" fill="#f0a500"/>
+            <circle cx="63" cy="58" r="2.5" fill="#f0a500"/>
+            <path d="M47 66 Q55 72 63 66" stroke="#f0a500" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </svg>
+          <div class="bp-bomb-time" id="bp-bomb-time">—</div>
+        </div>
+
+        <div class="bp-syllable-wrap">
+          <div class="bp-syllable-label">Contiene la sílaba</div>
+          <div class="bp-syllable" id="bp-syllable">??</div>
+        </div>
+
+        <div class="bp-input-wrap">
+          <input class="bp-input" id="bp-word-input" type="text" placeholder="escribe una palabra…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="bpKeyDown(event)" oninput="bpInputChange()">
+        </div>
+        <div class="bp-feedback" id="bp-feedback"></div>
+
+        <div id="bp-result-overlay" style="display:none;position:absolute;inset:0;background:rgba(12,21,32,.92);display:none;flex-direction:column;align-items:center;justify-content:center;border-radius:14px;gap:14px;z-index:10">
+          <div class="bp-result-title" id="bp-result-title">¡Ganaste!</div>
+          <div class="bp-result-sub" id="bp-result-sub"></div>
+          <div id="bp-result-pot" style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:700;color:var(--gold2);display:none"></div>
+          <button class="bp-result-btn" onclick="bpPlayAgain()">Jugar de nuevo</button>
+          <button class="auth-btn secondary" style="width:auto;padding:9px 20px" onclick="bpLeave()">Salir</button>
+        </div>
+      </div>
+
+      <!-- Right panel -->
+      <div class="bp-right">
+        <div class="bp-info-card">
+          <div class="bp-pot-label" style="margin-bottom:4px">Pozo de la partida 🏆</div>
+          <div class="bp-pot-display" id="bp-game-pot">$0</div>
+        </div>
+        <div class="bp-info-card">
+          <div class="bp-info-title">Palabras usadas</div>
+          <div class="bp-used-words" id="bp-used-words"><span style="font-size:11px;color:var(--muted)">Ninguna aún</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
